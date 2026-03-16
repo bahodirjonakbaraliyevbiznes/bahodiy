@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bahodiy — Milliy Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-links">
+      <a href="#">Sotuvchi bo'lish</a>
+      <a href="#">Yordam</a>
+      <a href="#">Ilovani yuklab olish</a>
+    </div>
+    <div class="topbar-links">
+      <a href="#">🇺🇿 O'zbekcha</a>
+      <a href="#">UZS</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="container header-inner">
+    <a href="index.html" class="logo">bahodiy<span>market</span></a>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Mahsulot, brend yoki kategoriya qidiring..." oninput="handleSearch(this.value)"/>
+      <button class="search-btn" onclick="handleSearch(document.getElementById('searchInput').value)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" onclick="showPage('wishlist')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>Sevimlilar</span>
+        <span class="badge" id="wishBadge">0</span>
+      </button>
+      <button class="icon-btn" onclick="showPage('cart')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span>Savat</span>
+        <span class="badge" id="cartBadge">0</span>
+      </button>
+      <button class="icon-btn" onclick="showPage('profile')" id="profileBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="profileBtnText">Kirish</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="active" onclick="filterCategory('all',event)">🏠 Barchasi</a>
+    <a href="#" onclick="filterCategory('electronics',event)">📱 Elektronika</a>
+    <a href="#" onclick="filterCategory('clothing',event)">👗 Kiyim</a>
+    <a href="#" onclick="filterCategory('home',event)">🏡 Uy-ro'zg'or</a>
+    <a href="#" onclick="filterCategory('beauty',event)">💄 Go'zallik</a>
+    <a href="#" onclick="filterCategory('sports',event)">⚽ Sport</a>
+    <a href="#" onclick="filterCategory('food',event)">🍎 Oziq-ovqat</a>
+    <a href="#" onclick="filterCategory('toys',event)">🧸 O'yinchoqlar</a>
+    <a href="#" onclick="showPage('admin')" style="margin-left:auto;color:var(--pink)">⚙️ Admin</a>
+  </div>
+</nav>
+
+<!-- PAGES -->
+<div id="app">
+
+<!-- ═══ HOME PAGE ═══ -->
+<div id="page-home" class="page active">
+  <div class="container main-wrap">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-title">📂 Kategoriyalar</div>
+      <ul>
+        <li><a href="#" onclick="filterCategory('electronics',event)"><span>📱</span> Elektronika</a></li>
+        <li><a href="#" onclick="filterCategory('clothing',event)"><span>👗</span> Kiyim-kechak</a></li>
+        <li><a href="#" onclick="filterCategory('home',event)"><span>🏡</span> Uy-ro'zg'or</a></li>
+        <li><a href="#" onclick="filterCategory('beauty',event)"><span>💄</span> Go'zallik</a></li>
+        <li><a href="#" onclick="filterCategory('sports',event)"><span>⚽</span> Sport</a></li>
+        <li><a href="#" onclick="filterCategory('food',event)"><span>🍎</span> Oziq-ovqat</a></li>
+        <li><a href="#" onclick="filterCategory('toys',event)"><span>🧸</span> O'yinchoqlar</a></li>
+        <li><a href="#" onclick="filterCategory('books',event)"><span>📚</span> Kitoblar</a></li>
+      </ul>
+      <div class="sidebar-promo">
+        <div class="promo-tag">🔥 Chegirma</div>
+        <div class="promo-text">50% gacha chegirmalar!</div>
+        <button onclick="filterCategory('all',event)" class="promo-btn">Ko'rish</button>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <div class="content">
+      <!-- BANNER -->
+      <div class="banner-wrap">
+        <div class="banner banner-1" id="banner">
+          <div class="banner-text">
+            <span class="banner-tag">🔥 Yangi aksiya</span>
+            <h1>Mega Chegirmalar<br/>50% gacha!</h1>
+            <p>Eng sara mahsulotlar eng qulay narxlarda</p>
+            <button class="banner-btn" onclick="filterCategory('all',event)">Hozir xarid qilish →</button>
+          </div>
+          <div class="banner-deco"></div>
+          <div class="banner-deco2"></div>
+          <div class="banner-emoji">🛍️</div>
+        </div>
+        <div class="banner-dots">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+
+      <!-- FLASH DEALS -->
+      <div class="section-header">
+        <div class="section-title">
+          <span class="fire">🔥</span> Flash Chegirmalar
+          <div class="timer">
+            <div class="timer-block" id="th">02</div>
+            <span class="timer-sep">:</span>
+            <div class="timer-block" id="tm">45</div>
+            <span class="timer-sep">:</span>
+            <div class="timer-block" id="ts">30</div>
+          </div>
+        </div>
+        <a href="#" class="see-all">Barchasi →</a>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div id="productsGrid" class="products-grid"></div>
+
+      <!-- CATEGORIES QUICK -->
+      <div class="section-header">
+        <div class="section-title">🏷️ Mashhur Kategoriyalar</div>
+      </div>
+      <div class="cats-quick">
+        <div class="cat-card" onclick="filterCategory('electronics',event)"><span>📱</span><p>Elektronika</p></div>
+        <div class="cat-card" onclick="filterCategory('clothing',event)"><span>👗</span><p>Kiyim</p></div>
+        <div class="cat-card" onclick="filterCategory('home',event)"><span>🏡</span><p>Uy-ro'zg'or</p></div>
+        <div class="cat-card" onclick="filterCategory('beauty',event)"><span>💄</span><p>Go'zallik</p></div>
+        <div class="cat-card" onclick="filterCategory('sports',event)"><span>⚽</span><p>Sport</p></div>
+        <div class="cat-card" onclick="filterCategory('food',event)"><span>🍎</span><p>Oziq-ovqat</p></div>
+        <div class="cat-card" onclick="filterCategory('toys',event)"><span>🧸</span><p>O'yinchoqlar</p></div>
+        <div class="cat-card" onclick="filterCategory('books',event)"><span>📚</span><p>Kitoblar</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CART PAGE ═══ -->
+<div id="page-cart" class="page">
+  <div class="container" style="padding:30px 20px">
+    <h2 class="page-title">🛒 Mening Savatim</h2>
+    <div class="cart-wrap">
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-summary" id="cartSummary"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WISHLIST PAGE ═══ -->
+<div id="page-wishlist" class="page">
+  <div class="container" style="padding:30px 20px">
+    <h2 class="page-title">❤️ Sevimlilar</h2>
+    <div id="wishlistGrid" class="products-grid"></div>
+  </div>
+</div>
+
+<!-- ═══ PRODUCT DETAIL PAGE ═══ -->
+<div id="page-product" class="page">
+  <div class="container" style="padding:30px 20px">
+    <button onclick="showPage('home')" class="back-btn">← Orqaga</button>
+    <div id="productDetail"></div>
+  </div>
+</div>
+
+<!-- ═══ LOGIN PAGE ═══ -->
+<div id="page-login" class="page">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">bahodiy<span>market</span></div>
+      <h2>Kirish</h2>
+      <p class="auth-sub">Hisobingizga kiring</p>
+      <div class="form-group">
+        <label>📧 Email</label>
+        <input type="email" id="loginEmail" placeholder="email@example.com"/>
+      </div>
+      <div class="form-group">
+        <label>🔒 Parol</label>
+        <input type="password" id="loginPassword" placeholder="Parolni kiriting"/>
+      </div>
+      <div id="loginError" class="auth-error"></div>
+      <button onclick="handleLogin()" class="auth-btn">Kirish</button>
+      <div class="auth-divider">yoki</div>
+      <button onclick="showPage('register')" class="auth-btn-outline">Ro'yxatdan o'tish</button>
+      <p class="auth-hint">Admin: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f1f4fdf9fed0e5eae5fdbee5ea">[email&#160;protected]</a> / admin123</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REGISTER PAGE ═══ -->
+<div id="page-register" class="page">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">bahodiy<span>market</span></div>
+      <h2>Ro'yxatdan o'tish</h2>
+      <p class="auth-sub">Yangi hisob yarating</p>
+      <div class="form-group">
+        <label>👤 Ism</label>
+        <input type="text" id="regName" placeholder="Ismingiz"/>
+      </div>
+      <div class="form-group">
+        <label>📧 Email</label>
+        <input type="email" id="regEmail" placeholder="email@example.com"/>
+      </div>
+      <div class="form-group">
+        <label>🔒 Parol</label>
+        <input type="password" id="regPassword" placeholder="Kamida 6 ta belgi"/>
+      </div>
+      <div id="regError" class="auth-error"></div>
+      <button onclick="handleRegister()" class="auth-btn">Ro'yxatdan o'tish</button>
+      <div class="auth-divider">yoki</div>
+      <button onclick="showPage('login')" class="auth-btn-outline">Kirish</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PROFILE PAGE ═══ -->
+<div id="page-profile" class="page">
+  <div class="container" style="padding:30px 20px; max-width:600px">
+    <h2 class="page-title">👤 Profilim</h2>
+    <div id="profileContent"></div>
+  </div>
+</div>
+
+<!-- ═══ ADMIN PAGE ═══ -->
+<div id="page-admin" class="page">
+  <div class="container" style="padding:30px 20px">
+    <h2 class="page-title">⚙️ Admin Panel</h2>
+    <div id="adminContent"></div>
+  </div>
+</div>
+
+</div><!-- end #app -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <div class="footer-logo">bahodiy<span>market</span></div>
+      <p>O'zbekistonning eng yirik milliy marketplace'i. Xavfsiz xarid, tez yetkazib berish.</p>
+      <div class="social-links">
+        <a href="#">📘</a><a href="#">📷</a><a href="#">✈️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Xaridorlar uchun</h4>
+      <ul>
+        <li><a href="#">Qanday xarid qilish</a></li>
+        <li><a href="#">To'lov usullari</a></li>
+        <li><a href="#">Yetkazib berish</a></li>
+        <li><a href="#">Qaytarish</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Sotuvchilar uchun</h4>
+      <ul>
+        <li><a href="#">Sotuvchi bo'lish</a></li>
+        <li><a href="#">Seller Cabinet</a></li>
+        <li><a href="#">Komissiya</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Aloqa</h4>
+      <ul>
+        <li>📞 +998 71 200 00 00</li>
+        <li>📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dba8aeababb4a9af9baea1aeb6f5aea1">[email&#160;protected]</a></li>
+        <li>🕐 24/7 ishlaydi</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">© 2024 Bahodiy Market. Barcha huquqlar himoyalangan.</div>
+  </div>
+</footer>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal">
+    <h3 id="modalTitle">Mahsulot</h3>
+    <div class="form-group"><label>📝 Nomi</label><input type="text" id="mName" placeholder="Mahsulot nomi"/></div>
+    <div class="form-group"><label>💰 Narx (so'm)</label><input type="number" id="mPrice" placeholder="3500000"/></div>
+    <div class="form-group"><label>🏷️ Eski narx (ixtiyoriy)</label><input type="number" id="mOldPrice" placeholder="4200000"/></div>
+    <div class="form-group"><label>📂 Kategoriya</label>
+      <select id="mCategory">
+        <option value="electronics">📱 Elektronika</option>
+        <option value="clothing">👗 Kiyim</option>
+        <option value="home">🏡 Uy-ro'zg'or</option>
+        <option value="beauty">💄 Go'zallik</option>
+        <option value="sports">⚽ Sport</option>
+        <option value="food">🍎 Oziq-ovqat</option>
+        <option value="toys">🧸 O'yinchoqlar</option>
+        <option value="books">📚 Kitoblar</option>
+      </select>
+    </div>
+    <div class="form-group"><label>😀 Emoji</label><input type="text" id="mEmoji" placeholder="📦"/></div>
+    <div class="form-group"><label>🔥 Chegirma (%)</label><input type="number" id="mDiscount" placeholder="20"/></div>
+    <div class="modal-footer">
+      <button class="modal-cancel" onclick="closeModal()">Bekor qilish</button>
+      <butt
